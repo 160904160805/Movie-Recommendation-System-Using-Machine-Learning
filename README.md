@@ -88,22 +88,6 @@ tmdb_5000_credits.csv
 3️⃣ Install Dependencies
 pip install pandas numpy scikit-learn
 
-▶️ Running the Recommendation Engine
-Function Signature
-recommend_movies(movie_title, top_n=5)
-Example Execution
-recommend_movies('The Dark Knight', top_n=5)
-📊 Sample Output
-==================================================
-TOP 5 RECOMMENDATIONS FOR: THE DARK KNIGHT
-==================================================
-No.  Movie Title                     Similarity Score
---------------------------------------------------
-1    The Dark Knight Rises            0.7001
-2    Batman Begins                   0.6325
-3    Batman Returns                  0.2887
-4    Batman Forever                  0.2764
-5    Inception                       0.2621
 
 🛠 Technology Stack
 Component	Tools Used
