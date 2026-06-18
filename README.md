@@ -1,111 +1,56 @@
-🎬 Movie Recommendation System
+🎬 Movie Recommendation System (Content-Based)
 
-This project implements a Content-Based Movie Recommendation System using natural language processing and vector similarity techniques. The system recommends movies based on content similarity rather than collaborative user behavior, making it suitable for cold-start scenarios.
+This project is a Content-Based Movie Recommendation System that suggests movies similar to a given movie using textual features such as genre, overview, cast, and director.
+It does not rely on user ratings and works purely on movie content similarity.
 
-🔁 System Workflow Overview
-[ Raw TMDB Dataset ]
-        │
-        ▼
-[ Data Cleaning & JSON Parsing ]
-        │
-        ▼
-[ Space Collapse Transformation ]
-        │
-        ▼
-[ Unified Tags Generation ]
-        │
-        ▼
-[ Count Vectorization (5,000 Features) ]
-        │
-        ▼
-[ Cosine Similarity Matrix ]
-        │
-        ▼
-[ Top-N Recommendation Engine ]
-
-⚙️ Key Workflow Engineering Phases
-1. Feature Parsing & Truncation
-Converts stringified JSON attributes into structured Python objects using ast.literal_eval.
-Extracts:
-Top 3 billed cast members
-Director from the crew data
-Removes unnecessary metadata to reduce dimensional noise.
-2. Space Collapse Transformation
-Eliminates inner-word spaces to avoid token fragmentation.
-
-Example:
-
-Johnny Depp → JohnnyDepp
-Prevents the vectorizer from treating common first names as independent tokens.
-3. Bag-of-Words Representation
-Merges selected attributes into a single textual field called tags:
+📌 How It Works (Simple Flow)
+TMDB Dataset
+   ↓
+Data Cleaning & Feature Extraction
+   ↓
+Text Vectorization (Bag of Words)
+   ↓
+Cosine Similarity
+   ↓
+Top-N Movie Recommendations
+⚙️ Features Used
 Genres
+Movie Overview
 Keywords
-Overview
-Cast
+Top 3 Cast Members
 Director
-Converts all text to lowercase.
-Applies stop-word filtering.
-Maps tokens into a 5,000-word vocabulary using CountVectorizer.
-4. Geometric Similarity Matching
-Uses Cosine Similarity to compute angular distance between movie vectors.
-Ensures similarity is invariant to document length.
-Enables semantic proximity detection across high-dimensional feature space.
 
-📂 Repository Structure
+All features are combined into a single text column and converted into vectors.
+
+🧠 Technique Used
+Count Vectorizer (5,000 features)
+Cosine Similarity for measuring similarity between movies
+📂 Project Structure
 .
 ├── data/
-│   └── tmdb_5000_dataset.zip      # Compressed TMDB Movies & Credits CSV files
+│   └── tmdb_5000_dataset.zip
 ├── notebooks/
-│   └── movie_recommender.ipynb    # End-to-end Google Colab execution notebook
+│   └── movie_recommender.ipynb
 ├── src/
-│   └── main.py                    # Modular, production-ready Python script
-└── README.md                      # Project documentation and setup guide
-
-🚀 Getting Started (Google Colab / Local Execution)
-1️⃣ Clone the Repository
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
-cd YOUR_REPOSITORY_NAME
-2️⃣ Extract the Dataset
-
-The dataset is compressed to bypass GitHub file-size constraints.
-
-Option A: Using Terminal (Linux / macOS / Colab)
-unzip data/tmdb_5000_dataset.zip -d ./
-Option B: Using Python
-import zipfile
-
-with zipfile.ZipFile('data/tmdb_5000_dataset.zip', 'r') as zip_ref:
-    zip_ref.extractall('./')
-
-print("Dataset extraction completed successfully.")
-
-After extraction, the following files will appear:
-
-tmdb_5000_movies.csv
-tmdb_5000_credits.csv
-
-3️⃣ Install Dependencies
+│   └── main.py
+└── README.md
+🚀 How to Run
+1. Extract Dataset
+unzip data/tmdb_5000_dataset.zip
+2. Install Dependencies
 pip install pandas numpy scikit-learn
+3. Run Recommendation
+recommend_movies('The Dark Knight', top_n=5)
+📊 Sample Output
+Top 5 Recommendations for: The Dark Knight
 
-
-🛠 Technology Stack
-Component	Tools Used
-Data Processing	Pandas, NumPy
-Feature Engineering	CountVectorizer
-Similarity Computation	Cosine Similarity
-JSON Parsing	ast.literal_eval
-Platform	Google Colab / Local Python
-
-📌 Key Highlights
-Fully content-driven recommendation pipeline
-Handles large datasets via compression
-Academically structured and final-year project ready
-Easily extendable to:
-TF-IDF
-Weighted features
-Hybrid recommendation systems
-
-📄 License
-
-This project is intended for academic and educational use.
+1. The Dark Knight Rises
+2. Batman Begins
+3. Batman Returns
+4. Batman Forever
+5. Inception
+🛠 Tools Used
+Python
+Pandas & NumPy
+Scikit-learn
+Google Colab
