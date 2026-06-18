@@ -121,6 +121,7 @@ Easily extendable to:
 TF-IDF
 Weighted features
 Hybrid recommendation systems
+
 📄 License
 
 This project is intended for academic and educational use.
